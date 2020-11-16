@@ -46,8 +46,15 @@ function search(event) {
     axios.get(`${apiUrl}`).then(showTemperature);
 }
 
+function showFahrenheitTemp(event) {
+    event.preventDefault();
+}
+
 let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 let apiKey = "242f24100968a339d770d17bf88c51f0";
+
+let scaleLink = document.querySelector("#scale");
+scaleLink.addEventListener("click", showFahrenheitTemp);
