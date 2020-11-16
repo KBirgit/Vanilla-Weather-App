@@ -11,6 +11,8 @@ timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
 function showTemperature(response) {
   console.log(response);
+  let cityElement = document.querySelector("#city");
+  cityElement.innerHTML = response.data.name;
 }
 
 function search(event) {
