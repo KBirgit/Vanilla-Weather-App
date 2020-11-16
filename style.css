@@ -31,6 +31,15 @@ h4 {
   color: #acacaa;
   text-transform: capitalize;
 }
+p {
+  font-size: 25px;
+  font-weight: 400;
+  color: #acacaa;
+  font-style: italic;
+  margin-left: 33px;
+  line-height: 50px;
+  margin-top: 50px;
+}
 img {
   width: 140px;
   vertical-align: bottom;
