@@ -17,7 +17,7 @@ function showTemperature(response) {
 
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
-  temperatureElement.innerHTML = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(response.data.main.temp);
 
 }
 
