@@ -23,7 +23,7 @@ function showTemperature(response) {
 
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(3.6 * response.data.wind.speed);
@@ -49,7 +49,15 @@ function search(event) {
 function showFahrenheitTemp(event) {
     event.preventDefault();
     let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = `${Math.round(celsiusTemperature * 9 / 5 + 32)}°F`;
+    if(units === "c") {
+        event.target.innerHTML = "/°C";
+        temperatureElement.innerHTML = `${Math.round(celsiusTemperature * 9 / 5 + 32)}°F`;
+        units = "f";
+    } else {
+        event.target.innerHTML = "/°F";
+        temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+        units = "c";
+    }
 }
 
 let celsiusTemperature = null;
@@ -58,5 +66,7 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 let apiKey = "242f24100968a339d770d17bf88c51f0";
 
+
+let units = "c";
 let scaleLink = document.querySelector("#scale");
 scaleLink.addEventListener("click", showFahrenheitTemp);
