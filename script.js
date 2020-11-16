@@ -19,9 +19,11 @@ function showTemperature(response) {
   let windElement = document.querySelector("#wind");
   let iconElement = document.querySelector("#icon");
 
+  celsiusTemperature = response.data.main.temp;
+
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   descriptionElement.innerHTML = response.data.weather[0].description;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(3.6 * response.data.wind.speed);
@@ -43,6 +45,8 @@ function search(event) {
 
     axios.get(`${apiUrl}`).then(showTemperature);
 }
+
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
