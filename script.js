@@ -36,14 +36,17 @@ function showTemperature(response) {
     );
 }
 
-function search(event) {
-    event.preventDefault();
-    let searchInput = document.querySelector("#search-city-input");
-    let cityElement = searchInput.value;
-
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=metric`;
+function search(city) {
+    let apiKey = "242f24100968a339d770d17bf88c51f0";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let searchInput = document.querySelector("#search-city-input");
+    search(searchInput.value);
 }
 
 function showFahrenheitTemp(event) {
@@ -61,12 +64,12 @@ function showFahrenheitTemp(event) {
 }
 
 let celsiusTemperature = null;
+let units = "c";
 
 let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
-let apiKey = "242f24100968a339d770d17bf88c51f0";
+form.addEventListener("submit", handleSubmit);
 
-
-let units = "c";
 let scaleLink = document.querySelector("#scale");
 scaleLink.addEventListener("click", showFahrenheitTemp);
+
+search("Tallinn");
