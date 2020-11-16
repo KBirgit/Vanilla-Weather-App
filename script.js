@@ -14,10 +14,12 @@ function showTemperature(response) {
   let cityElement = document.querySelector("#city");
   let countryElement = document.querySelector("#country");
   let temperatureElement = document.querySelector("#temperature");
+  let descriptionElement = document.querySelector("#description");
 
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  descriptionElement.innerHTML = response.data.weather[0].description;
 
 }
 
