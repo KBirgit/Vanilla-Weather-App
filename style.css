@@ -27,6 +27,10 @@ h2 {
   font-size: 40px;
   font-weight: 600;
 }
+h4 {
+  color: #acacaa;
+  text-transform: capitalize;
+}
 img {
   width: 140px;
   vertical-align: bottom;
