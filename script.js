@@ -48,6 +48,8 @@ function search(event) {
 
 function showFahrenheitTemp(event) {
     event.preventDefault();
+    let temperatureElement = document.querySelector("#temperature");
+    temperatureElement.innerHTML = `${Math.round(celsiusTemperature * 9 / 5 + 32)}°F`;
 }
 
 let celsiusTemperature = null;
