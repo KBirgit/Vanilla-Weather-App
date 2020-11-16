@@ -8,3 +8,8 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 timeDay.innerHTML = `${day} ${hours}:${minutes}`;
+
+
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", search);
