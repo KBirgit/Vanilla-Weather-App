@@ -9,6 +9,10 @@ if (minutes < 10) {
 }
 timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
+function showTemperature(response) {
+  console.log(response);
+}
+
 function search(event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-city-input");
@@ -19,5 +23,5 @@ function search(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=${apiKey}&units=metric`;
 let apiKey = "242f24100968a339d770d17bf88c51f0";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=${apiKey}&units=metric`;
