@@ -12,7 +12,9 @@ timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 function search(event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-city-input");
-    let city = searchInput.value;
+    let cityResult = searchInput.value;
+
+    axios.get(`${apiUrl}`).then(showTemperature);
 }
 
 let form = document.querySelector("#search-form");
