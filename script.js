@@ -18,10 +18,11 @@ function search(event) {
     let searchInput = document.querySelector("#search-city-input");
     let cityResult = searchInput.value;
 
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=${apiKey}&units=metric`;
+
     axios.get(`${apiUrl}`).then(showTemperature);
 }
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
 let apiKey = "242f24100968a339d770d17bf88c51f0";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=${apiKey}&units=metric`;
