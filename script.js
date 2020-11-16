@@ -13,3 +13,5 @@ timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", search);
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&units=metric`;
+let apiKey = "242f24100968a339d770d17bf88c51f0";
