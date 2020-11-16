@@ -23,6 +23,10 @@ h1 {
   font-weight: 560;
   color: #666666;
 }
+h2 {
+  font-size: 40px;
+  font-weight: 600;
+}
 img {
   width: 140px;
   vertical-align: bottom;
