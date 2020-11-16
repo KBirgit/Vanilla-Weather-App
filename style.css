@@ -23,3 +23,7 @@ h1 {
   font-weight: 560;
   color: #666666;
 }
+img {
+  width: 140px;
+  vertical-align: bottom;
+}
