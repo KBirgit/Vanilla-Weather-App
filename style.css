@@ -12,6 +12,14 @@ form {
   padding: 8px 0;
   margin-bottom: 10px;
 }
+.cityForm {
+  width: 440px;
+  border: 5px solid #b0b0af;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 10px;
+  background: #fbfbfa;
+}
 .container {
   color: #666666;
   background: #fbfbfa;
