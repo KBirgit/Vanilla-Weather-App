@@ -12,6 +12,12 @@ form {
   padding: 8px 0;
   margin-bottom: 10px;
 }
+.container {
+  color: #666666;
+  background: #fbfbfa;
+  max-width: 800px;
+  padding: 10px 20px;
+}
 h1 {
   color: blue;
 }
