@@ -44,6 +44,10 @@ form {
   letter-spacing: 4px;
   font-weight: 700;
 }
+.currentButton:hover {
+  background-color: #fbfbfa;
+  color: #666666;
+}
 .container {
   color: #666666;
   background: #fbfbfa;
