@@ -80,6 +80,10 @@ img {
   width: 140px;
   vertical-align: bottom;
 }
+.fahrenheit {
+  font-size: 22px;
+  font-weight: 600;
+}
 .weekDay {
   border: 6px solid #b0b0af;
   border-radius: 4px;
