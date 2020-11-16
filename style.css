@@ -96,3 +96,9 @@ img {
 .weekDay img {
   width: 50px;
 }
+a {
+  color: #666666;
+}
+a:hover {
+  color: #666666;
+  opacity: 0.7;
