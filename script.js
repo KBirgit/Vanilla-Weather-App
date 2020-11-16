@@ -18,9 +18,9 @@ function showTemperature(response) {
 function search(event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-city-input");
-    let cityResult = searchInput.value;
+    let cityElement = searchInput.value;
 
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Tallinn&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityElement}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
 }
