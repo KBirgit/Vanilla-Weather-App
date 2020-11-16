@@ -111,3 +111,6 @@ select {
 input::placeholder {
   font-style: italic;
 }
+.nightTemp {
+  font-weight: normal;
+}
