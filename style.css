@@ -102,3 +102,9 @@ a {
 a:hover {
   color: #666666;
   opacity: 0.7;
+}
+input[type="text"],
+input[type="submit"],
+select {
+  outline: none;
+}
