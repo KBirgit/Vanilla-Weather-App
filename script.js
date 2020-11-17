@@ -63,7 +63,9 @@ function showForecast(response) {
     <div class="col">
             MON
         <br />
-            <img src="sun-behind-small-cloud_1f324.png" alt="Sun behind small cloud">
+            <img
+              src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+              alt="${forecast.weather[0].description}"/>
         <br />
             ${Math.round(forecast.temp.max)}° <span class="nightTemp">${Math.round(forecast.temp.min)}°</span>
     </div>
