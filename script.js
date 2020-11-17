@@ -49,20 +49,16 @@ function showForecast(response) {
         <br />
             <img src="sun-behind-small-cloud_1f324.png" alt="Sun behind small cloud">
         <br />
-            ${Math.round(forecast.temp.max)} <span class="nightTemp">6°</span>
+            ${Math.round(forecast.temp.max)}° <span class="nightTemp">${Math.round(forecast.temp.min)}°</span>
     </div>
     `
 }
 
 function search(city) {
-    
+
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
-
-    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=24.75&lon=59.44&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
-    
-    axios.get(`${apiUrl}`).then(showForecast);
 }
 
 function handleSubmit(event) {
@@ -93,6 +89,10 @@ function showPosition(position) {
     let gpsUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
 
     axios.get(`${gpsUrl}&appid=${apiKey}`).then(showTemperature);
+
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    
+    axios.get(`${apiUrl}`).then(showForecast);
 }
 
 function getCurrentPosition(event) {
