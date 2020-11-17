@@ -37,7 +37,6 @@ function showTemperature(response) {
 }
 
 function search(city) {
-    let apiKey = "242f24100968a339d770d17bf88c51f0";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
@@ -62,6 +61,23 @@ function showFahrenheitTemp(event) {
         units = "c";
     }
 }
+
+function showPosition(position) {
+
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+
+    let gpsUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
+
+    axios.get(`${gpsUrl}&appid=${apiKey}`).then(showTemperature);
+}
+
+function getCurrentPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+let apiKey = "242f24100968a339d770d17bf88c51f0";
 
 let celsiusTemperature = null;
 let units = "c";
