@@ -72,4 +72,7 @@ form.addEventListener("submit", handleSubmit);
 let scaleLink = document.querySelector("#scale");
 scaleLink.addEventListener("click", showFahrenheitTemp);
 
+let currentButton = document.querySelector("#current-button");
+currentButton.addEventListener("click", getCurrentPosition)
+
 search("Tallinn");
