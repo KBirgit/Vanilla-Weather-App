@@ -1,7 +1,7 @@
 function formatDate(timestamp) {
 let date = new Date();
-let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-let day = days[date.getDay()];
+let daysIndex = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let day = daysIndex[date.getDay()];
 let hours = date.getHours();
 if (hours < 10) {
   hours = `0${hours}`;
@@ -11,6 +11,13 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 return `${day} ${hours}:${minutes}`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let day = days[date.getDay()];
+  return day;
 }
 
 function getLocation(response) {
@@ -61,21 +68,28 @@ function getForecast() {
 }
 
 function showForecast(response) {
+  console.log(response);
     let forecastElement = document.querySelector("#forecast");
-    let forecast = response.data.daily[0];
-    console.log(forecast);
+    forecastElement.innerHTML = null;
+    let forecast = null;
 
-    forecastElement.innerHTML = `
-    <div class="col">
-            MON
+    for (let index = 0; index < 5; index++) {
+      forecast = response.data.daily[index];
+      console.log(forecast);
+      forecastElement.innerHTML += `
+      <span class="weekDay">
+      <div class="col">
+            ${formatDay(forecast.dt*1000)}
         <br />
             <img
               src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
               alt="${forecast.weather[0].description}"/>
         <br />
             ${Math.round(forecast.temp.max)}° <span class="nightTemp">${Math.round(forecast.temp.min)}°</span>
-    </div>
-    `
+            </div>
+            </span>
+    `;
+    }
 }
 
 function search(city) {
