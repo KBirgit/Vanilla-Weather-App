@@ -9,8 +9,19 @@ if (minutes < 10) {
 }
 timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
-function showTemperature(response) {
-    console.log(response);
+function getLocation(response) {
+  cityName = response.data.name;
+  latitude = response.data.coord.lat;
+  longitude = response.data.coord.lon;
+  getWeather();
+}
+
+function getWeather() {
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=metric`;
+    axios.get(`${apiUrl}`).then(showWeather).then(showForecast);
+}
+
+function showWeather(response) {
   let cityElement = document.querySelector("#city");
   let countryElement = document.querySelector("#country");
   let temperatureElement = document.querySelector("#temperature");
@@ -38,9 +49,15 @@ function showTemperature(response) {
     );
 }
 
+function getForecast() {
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(showForecast);
+}
+
 function showForecast(response) {
     let forecastElement = document.querySelector("#forecast");
     let forecast = response.data.daily[0];
+    console.log(forecast);
 
     forecastElement.innerHTML = `
     <div class="col">
@@ -54,14 +71,8 @@ function showForecast(response) {
 }
 
 function search(city) {
-
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-    axios.get(`${apiUrl}`).then(showTemperature);
-
-    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
-    
-    axios.get(`${apiUrl}`).then(showForecast);
+    axios.get(`${apiUrl}`).then(showWeather).then(getForecast);
 }
 
 function handleSubmit(event) {
@@ -84,6 +95,11 @@ function showFahrenheitTemp(event) {
     }
 }
 
+function getCurrentPosition(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
 function showPosition(position) {
 
     latitude = position.coords.latitude;
@@ -91,18 +107,14 @@ function showPosition(position) {
 
     let gpsUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
 
-    axios.get(`${gpsUrl}&appid=${apiKey}`).then(showTemperature);
+    axios.get(`${gpsUrl}&appid=${apiKey}`).then(showWeather);
 
     apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
     
     axios.get(`${apiUrl}`).then(showForecast);
 }
 
-function getCurrentPosition(event) {
-  event.preventDefault();
-  navigator.geolocation.getCurrentPosition(showPosition);
-}
-
+let cityName = null;
 let latitude = null;
 let longitude = null;
 
