@@ -36,10 +36,18 @@ function showTemperature(response) {
     );
 }
 
+function showForecast(response) {
+    console.log(response.data);
+}
+
 function search(city) {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
+
+    apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&appid=${apiKey}&units=metric`;
+    
+    axios.get(`${apiUrl}`).then(showForecast);
 }
 
 function handleSubmit(event) {
