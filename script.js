@@ -68,14 +68,12 @@ function getForecast() {
 }
 
 function showForecast(response) {
-  console.log(response);
     let forecastElement = document.querySelector("#forecast");
     forecastElement.innerHTML = null;
     let forecast = null;
 
     for (let index = 0; index < 5; index++) {
       forecast = response.data.daily[index];
-      console.log(forecast);
       forecastElement.innerHTML += `
       <span class="weekDay">
       <div class="col">
