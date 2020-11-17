@@ -37,9 +37,21 @@ function showTemperature(response) {
 }
 
 function showForecast(response) {
-    console.log(response.data);
-    let latitude = response.latitude;
-    let longitude = response.longitude;
+    console.log(response);
+    let forecastElement = document.querySelector("#forecast");
+    let forecast = response.data.daily[0];
+    
+    console.log(forecast);
+
+    forecastElement.innerHTML = `
+    <div class="col">
+            MON
+        <br />
+            <img src="sun-behind-small-cloud_1f324.png" alt="Sun behind small cloud">
+        <br />
+            ${Math.round(forecast.temp.max)} <span class="nightTemp">6°</span>
+    </div>
+    `
 }
 
 function search(city) {
@@ -48,7 +60,7 @@ function search(city) {
 
     axios.get(`${apiUrl}`).then(showTemperature);
 
-    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?q=${city}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=24.75&lon=59.44&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
     
     axios.get(`${apiUrl}`).then(showForecast);
 }
