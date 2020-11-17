@@ -10,7 +10,7 @@ if (minutes < 10) {
 timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
 function showTemperature(response) {
-    console.log(response.data);
+    console.log(response);
   let cityElement = document.querySelector("#city");
   let countryElement = document.querySelector("#country");
   let temperatureElement = document.querySelector("#temperature");
@@ -20,6 +20,8 @@ function showTemperature(response) {
   let iconElement = document.querySelector("#icon");
 
   celsiusTemperature = response.data.main.temp;
+  latitude = response.data.coord.lat;
+  longitude = response.data.coord.lon;
 
   cityElement.innerHTML = response.data.name;
   countryElement.innerHTML = response.data.sys.country;
@@ -37,11 +39,8 @@ function showTemperature(response) {
 }
 
 function showForecast(response) {
-    console.log(response);
     let forecastElement = document.querySelector("#forecast");
     let forecast = response.data.daily[0];
-    
-    console.log(forecast);
 
     forecastElement.innerHTML = `
     <div class="col">
@@ -59,6 +58,10 @@ function search(city) {
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
+
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    
+    axios.get(`${apiUrl}`).then(showForecast);
 }
 
 function handleSubmit(event) {
@@ -83,8 +86,8 @@ function showFahrenheitTemp(event) {
 
 function showPosition(position) {
 
-    let latitude = position.coords.latitude;
-    let longitude = position.coords.longitude;
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
 
     let gpsUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric`;
 
@@ -99,6 +102,9 @@ function getCurrentPosition(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
 }
+
+let latitude = null;
+let longitude = null;
 
 let apiKey = "242f24100968a339d770d17bf88c51f0";
 
