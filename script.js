@@ -10,7 +10,7 @@ if (minutes < 10) {
 timeDay.innerHTML = `${day} ${hours}:${minutes}`;
 
 function showTemperature(response) {
-    console.log(response);
+    console.log(response.data);
   let cityElement = document.querySelector("#city");
   let countryElement = document.querySelector("#country");
   let temperatureElement = document.querySelector("#temperature");
@@ -38,14 +38,17 @@ function showTemperature(response) {
 
 function showForecast(response) {
     console.log(response.data);
+    let latitude = response.latitude;
+    let longitude = response.longitude;
 }
 
 function search(city) {
+    
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     axios.get(`${apiUrl}`).then(showTemperature);
 
-    apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=5&appid=${apiKey}&units=metric`;
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?q=${city}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
     
     axios.get(`${apiUrl}`).then(showForecast);
 }
