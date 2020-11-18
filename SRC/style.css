@@ -7,13 +7,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 form {
-  border: 6px solid #d8d8d5;
-  border-radius: 4px;
-  padding: 8px 0;
+  padding: 20px 0;
   margin-bottom: 10px;
 }
 .cityForm {
-  width: 440px;
+  width: 476px;
   border: 5px solid #b0b0af;
   padding: 4px;
   border-radius: 4px;
@@ -21,7 +19,7 @@ form {
   background: #fbfbfa;
 }
 .searchButton {
-  width: 98px;
+  width: 40px;
   border: 4px solid #666666;
   border-radius: 4px;
   padding: 5px;
@@ -29,20 +27,22 @@ form {
   color: #666666;
   letter-spacing: 4px;
   font-weight: 700;
+  text-align: center;
 }
 .searchButton:hover {
   background-color: #fbfbfa;
   color: #666666;
 }
 .currentButton {
-  width: 100px;
+  width: 40px;
   border: 4px solid #666666;
   border-radius: 4px;
-  padding: 5px;
+  padding: 5px 5px 5px 8px;
   background: #d8d8d5;
   color: #666666;
   letter-spacing: 4px;
   font-weight: 700;
+  text-align: center;
 }
 .currentButton:hover {
   background-color: #fbfbfa;
