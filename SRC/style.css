@@ -116,3 +116,10 @@ input::placeholder {
 .nightTemp {
   font-weight: normal;
 }
+.text {
+  font-size: 14px;
+  padding-left: 8px;
+}
+.code {
+  color: #2a6e89;
+}
