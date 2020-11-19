@@ -83,7 +83,7 @@ function showForecast(response) {
               src="images/${forecast.weather[0].icon}.png"
               alt="${forecast.weather[0].description}"/>
         <br />
-            ${Math.round(forecast.temp.max)}° <span class="nightTemp">${Math.round(forecast.temp.min)}°</span>
+            <span id="temperature">${Math.round(forecast.temp.max)}</span>° <span class="nightTemp" id="temperature">${Math.round(forecast.temp.min)}</span>°
             </div>
             </span>
     `;
@@ -107,24 +107,25 @@ function errorFunction(error) {
   );
 }
 
-function getFahrenheitTemp() {
-  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showFahrenheitTemp);
-}
-
 function handleScaleClick(event) {
     event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
+    let temperatureElement = document.querySelectorAll("#temperature");
     if(units === "c") {
-        event.target.innerHTML = "/°C";
-        temperatureElement.innerHTML = `${Math.round(celsiusTemperature * 9 / 5 + 32)}°F`;
-        units = "f";
+      event.target.innerHTML = "/°C";
+      temperatureElement.forEach(function(element) {
+        let degrees = parseInt(element.innerHTML);
+        element.innerHTML = Math.round(degrees * 9 / 5 + 32);
+      });
+      units = "f";
     } else {
         event.target.innerHTML = "/°F";
-        temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
-        units = "c";
+        temperatureElement.forEach(function(element) {
+        let degrees = parseInt(element.innerHTML);
+        element.innerHTML = Math.round((degrees - 32) * 5 / 9);
+        });
+        units = "c";  
+      };
     }
-}
 
 function getCurrentPosition(event) {
   event.preventDefault();
@@ -143,6 +144,10 @@ function showPosition(position) {
     apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
     
     axios.get(`${apiUrl}`).then(showForecast);
+}
+function getSomething() {
+    apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`;
+    console.log(apiUrl);
 }
 
 let cityName = null;
