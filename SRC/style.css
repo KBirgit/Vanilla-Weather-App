@@ -1,6 +1,4 @@
 body {
-  border: 8px solid #f2f2f2;
-  border-radius: 8px;
   max-width: 690px;
   margin: auto;
   margin-top: 20px;
@@ -51,6 +49,8 @@ form {
   color: #666666;
 }
 .container {
+  border: 8px solid #f2f2f2;
+  border-radius: 8px;
   color: #666666;
   background: #fbfbfa;
   max-width: 700px;
