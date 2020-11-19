@@ -50,8 +50,8 @@ function showWeather(response) {
   countryElement.innerHTML = response.data.sys.country;
   temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°C`;
   descriptionElement.innerHTML = response.data.weather[0].description;
-  humidityElement.innerHTML = response.data.main.humidity;
-  windElement.innerHTML = Math.round(3.6 * response.data.wind.speed);
+  humidityElement.innerHTML = `${response.data.main.humidity} %`;
+  windElement.innerHTML = `${Math.round(3.6 * response.data.wind.speed)} km/h`;
   dateElement.innerHTML = formatDate(response.data.dt*1000);
   iconElement.setAttribute(
     "src",
@@ -83,7 +83,7 @@ function showForecast(response) {
               src="images/${forecast.weather[0].icon}.png"
               alt="${forecast.weather[0].description}"/>
         <br />
-            <span id="temperature">${Math.round(forecast.temp.max)}</span>° <span class="nightTemp" id="temperature">${Math.round(forecast.temp.min)}</span>°
+            <span id="temperature-span">${Math.round(forecast.temp.max)}</span>° <span class="nightTemp" id="temperature-span">${Math.round(forecast.temp.min)}</span>°
             </div>
             </span>
     `;
@@ -107,15 +107,21 @@ function errorFunction(error) {
   );
 }
 
-function handleScaleClick(event) {
+function scale(event) {
     event.preventDefault();
-    let temperatureElement = document.querySelectorAll("#temperature");
+    let temp = document.querySelector("#temperature");
+    let temperatureElement = document.querySelectorAll("#temperature-span");
+    let windElement = document.querySelector("#wind");
+    console.log(windElement);
     if(units === "c") {
       event.target.innerHTML = "/°C";
       temperatureElement.forEach(function(element) {
         let degrees = parseInt(element.innerHTML);
         element.innerHTML = Math.round(degrees * 9 / 5 + 32);
       });
+      temp.innerHTML = `${Math.round(celsiusTemperature * 9 / 5 + 32)}°F`;
+      let wind = parseInt(windElement.innerHTML);
+      windElement.innerHTML = `${Math.round(wind / 1.609344)} mph`;
       units = "f";
     } else {
         event.target.innerHTML = "/°F";
@@ -123,6 +129,9 @@ function handleScaleClick(event) {
         let degrees = parseInt(element.innerHTML);
         element.innerHTML = Math.round((degrees - 32) * 5 / 9);
         });
+        temp.innerHTML = `${Math.round(celsiusTemperature)}°C`;
+        let wind = parseInt(windElement.innerHTML);
+        windElement.innerHTML = `${Math.round(wind * 1.609344)} km/h`;
         units = "c";  
       };
     }
@@ -163,7 +172,7 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let scaleLink = document.querySelector("#scale");
-scaleLink.addEventListener("click", handleScaleClick);
+scaleLink.addEventListener("click", scale);
 
 let currentButton = document.querySelector("#current-button");
 currentButton.addEventListener("click", getCurrentPosition)
