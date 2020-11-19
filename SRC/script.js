@@ -107,7 +107,12 @@ function errorFunction(error) {
   );
 }
 
-function showFahrenheitTemp(event) {
+function getFahrenheitTemp() {
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showFahrenheitTemp);
+}
+
+function handleScaleClick(event) {
     event.preventDefault();
     let temperatureElement = document.querySelector("#temperature");
     if(units === "c") {
@@ -153,7 +158,7 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let scaleLink = document.querySelector("#scale");
-scaleLink.addEventListener("click", showFahrenheitTemp);
+scaleLink.addEventListener("click", handleScaleClick);
 
 let currentButton = document.querySelector("#current-button");
 currentButton.addEventListener("click", getCurrentPosition)
